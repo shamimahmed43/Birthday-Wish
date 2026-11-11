@@ -1,0 +1,939 @@
+/* ==========================================================
+   Chapter styles: Memory ATM, Cut the Cake, Accept Gift
+   Fully responsive across mobile, tablet, laptop, and desktop.
+   ========================================================== */
+
+/* ---------------- Shared chapter heading ---------------- */
+.chapter-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ================= MEMORY ATM ================= */
+.atm-stage {
+  position: relative;
+  width: min(960px, 100%);
+  margin: 0 auto;
+  height: clamp(480px, calc(100svh - 165px), 660px);
+  max-height: calc(100vh - 165px);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0d0b0c;
+  box-shadow: 0 40px 90px rgba(20, 10, 12, 0.45);
+  perspective: 1500px;
+  perspective-origin: 50% 42%;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.atm-booth-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.62) saturate(0.85);
+}
+.atm-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 38%, rgba(255, 245, 225, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+/* ---- machine ---- */
+.atm-machine {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(390px, 86%);
+  max-height: 98%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  z-index: 3;
+  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.5));
+  display: flex;
+  flex-direction: column;
+}
+
+.atm-machine::before {
+  content: "";
+  position: absolute;
+  top: 3%;
+  right: -28px;
+  width: 32px;
+  height: 94%;
+  background: linear-gradient(180deg, #4b5157, #2b2f33 55%, #1a1d20);
+  transform: rotateY(72deg);
+  transform-origin: left center;
+  border-radius: 3px;
+}
+
+.atm-topper {
+  position: relative;
+  margin: 0 auto;
+  width: 86%;
+  padding: clamp(6px, 1.2vh, 9px) 0;
+  text-align: center;
+  color: #eafff6;
+  font:
+    600 clamp(10px, 2vw, 12.5px)/1 "DM Sans",
+    sans-serif;
+  letter-spacing: 0.28em;
+  background: linear-gradient(180deg, #0f6b58, #084337);
+  border-radius: 6px 6px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 0 24px rgba(31, 214, 168, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.atm-body {
+  position: relative;
+  padding: clamp(8px, 1.5vh, 14px) clamp(10px, 2vw, 15px);
+  border-radius: 8px 8px 3px 3px;
+  background: linear-gradient(180deg, #6e757c 0%, #575e64 8%, #454b51 42%, #33383d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.22),
+    inset -14px 0 26px rgba(0, 0, 0, 0.38),
+    inset 14px 0 20px rgba(255, 255, 255, 0.05);
+}
+.atm-body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(102deg, transparent 49.6%, rgba(255, 255, 255, 0.5) 49.8%, transparent 50%),
+    linear-gradient(87deg, transparent 21%, rgba(0, 0, 0, 0.4) 21.2%, transparent 21.4%);
+}
+
+/* ---- screen block with side buttons ---- */
+.atm-face {
+  display: grid;
+  grid-template-columns: clamp(16px, 3.5vw, 20px) 1fr clamp(16px, 3.5vw, 20px);
+  gap: clamp(5px, 1.2vw, 8px);
+  align-items: center;
+}
+
+.side-rail {
+  display: grid;
+  gap: clamp(6px, 1.2vh, 10px);
+}
+.side-btn {
+  position: relative;
+  height: clamp(14px, 2.2vh, 19px);
+  border: 0;
+  padding: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #cfd6db, #8d959b);
+  box-shadow:
+    0 2px 0 #4a5055,
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+.side-btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.side-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #4a5055;
+}
+.side-btn.armed {
+  background: linear-gradient(180deg, #7df4cf, #14a37e);
+  box-shadow:
+    0 2px 0 #0a6853,
+    0 0 14px rgba(31, 214, 168, 0.7);
+}
+
+.atm-screen-frame {
+  position: relative;
+  padding: clamp(6px, 1.2vh, 10px);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #24282c, #14171a);
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.8);
+}
+.atm-screen {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  min-height: clamp(110px, 20vh, 150px);
+  padding: clamp(6px, 1.2vh, 10px);
+  overflow: hidden;
+  border-radius: 3px;
+  color: #b8ffe6;
+  font-family: "DM Sans", monospace;
+  background: radial-gradient(ellipse at 50% 30%, #0d2f28, #04120f 75%);
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.85),
+    inset 0 0 70px rgba(24, 255, 190, 0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+.atm-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+    linear-gradient(125deg, rgba(255, 255, 255, 0.09) 0 32%, transparent 46%);
+}
+.atm-screen h4 {
+  margin: 0;
+  font-size: clamp(11px, 2.2vw, 15px);
+  letter-spacing: 0.1em;
+  color: #d9fff2;
+  line-height: 1.2;
+}
+.atm-screen p {
+  margin: 0;
+  font-size: clamp(9.5px, 1.8vw, 11px);
+  letter-spacing: 0.05em;
+  color: #7fe6c6;
+  line-height: 1.45;
+}
+.atm-screen small {
+  font-size: clamp(8px, 1.6vw, 9.5px);
+  letter-spacing: 0.12em;
+  color: #55b79b;
+}
+.screen-fade {
+  animation: screenFade 0.35s ease both;
+}
+@keyframes screenFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.atm-progress {
+  height: 7px;
+  border: 1px solid #2c7a65;
+  background: #071a16;
+}
+.atm-progress span {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #2ff0b6 0 7px, #0b3d33 7px 9px);
+  transition: width 0.18s linear;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  font-size: 16px;
+  color: #2ff0b6;
+}
+.pin-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #2c7a65;
+  display: block;
+}
+.pin-dots i.filled {
+  background: #2ff0b6;
+  box-shadow: 0 0 8px #2ff0b6;
+}
+
+.atm-menu {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+.atm-menu-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: clamp(9.5px, 1.8vw, 11px);
+  letter-spacing: 0.06em;
+  padding: 3px 2px;
+  border: 0;
+  border-bottom: 1px dashed rgba(47, 240, 182, 0.2);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.atm-menu-row:hover,
+.atm-menu-row:active {
+  background: rgba(47, 240, 182, 0.16);
+}
+.atm-menu-row b {
+  color: #d9fff2;
+  font-weight: 500;
+}
+.atm-menu-row em {
+  font-style: normal;
+  color: #38c79f;
+}
+
+.atm-nav-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.atm-nav {
+  border: 1px solid rgba(47, 240, 182, 0.55);
+  background: rgba(20, 163, 126, 0.18);
+  color: #d9fff2;
+  font:
+    600 clamp(9px, 1.6vw, 10px)/1 "DM Sans",
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.atm-nav:hover {
+  background: rgba(47, 240, 182, 0.34);
+}
+
+.memory-frame {
+  margin: 0 auto;
+  width: min(120px, 68%);
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, rgba(47, 240, 182, 0.22), rgba(12, 60, 50, 0.7));
+  border: 1px solid rgba(47, 240, 182, 0.35);
+  overflow: hidden;
+}
+.memory-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.balance-rows {
+  display: grid;
+  gap: 3px;
+  text-align: left;
+  padding: 0 2px;
+}
+.balance-row {
+  font-size: clamp(8.5px, 1.6vw, 10px);
+  letter-spacing: 0.06em;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px;
+  align-items: center;
+  color: #d9fff2;
+}
+.balance-bar {
+  grid-column: 1 / -1;
+  height: 4px;
+  background: #0b3d33;
+}
+.balance-bar span {
+  display: block;
+  height: 100%;
+  background: #2ff0b6;
+  transition: width 0.8s ease;
+}
+
+.atm-input {
+  width: 100%;
+  padding: 5px 8px;
+  font-size: 11px;
+  color: #d9fff2;
+  background: #071a16;
+  border: 1px solid #2c7a65;
+  outline: 0;
+  font-family: inherit;
+}
+
+/* ---- shelf: card slot + receipt slot ---- */
+.atm-shelf {
+  position: relative;
+  margin-top: clamp(6px, 1.2vh, 10px);
+  padding: clamp(6px, 1.2vh, 10px) clamp(8px, 1.8vw, 12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #5b6167, #3c4247);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.35);
+}
+
+.slot-group {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+}
+.slot-label {
+  font:
+    600 6.5px "DM Sans",
+    sans-serif;
+  letter-spacing: 0.14em;
+  color: #cfd6db;
+  text-transform: uppercase;
+}
+
+.card-slot {
+  position: relative;
+  width: clamp(75px, 18vw, 105px);
+  height: clamp(11px, 1.8vh, 15px);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #101315, #2a2f33 55%, #0a0c0d);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.95),
+    0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.card-slot.hot {
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.95),
+    0 0 14px rgba(47, 240, 182, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.slot-led {
+  position: absolute;
+  right: -10px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5c2626;
+  box-shadow: inset 0 0 3px #000;
+}
+.slot-led.green {
+  background: #2ff0b6;
+  box-shadow: 0 0 10px #2ff0b6;
+}
+.slot-led.blink {
+  animation: ledBlink 0.7s steps(1) infinite;
+}
+@keyframes ledBlink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.receipt-slot {
+  position: relative;
+  width: clamp(70px, 16vw, 98px);
+  height: clamp(9px, 1.5vh, 12px);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #0b0d0e, #23272a 60%, #08090a);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.95),
+    0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.cash-slot {
+  margin: clamp(6px, 1vh, 10px) auto 0;
+  width: 65%;
+  height: clamp(12px, 2vh, 17px);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #191c1e, #34383c 45%, #0e1011);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* ---- keypad ---- */
+.atm-keypad {
+  margin: clamp(6px, 1.2vh, 10px) auto 0;
+  width: min(220px, 78%);
+  padding: clamp(5px, 1vh, 8px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(3px, 0.7vh, 5px);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #4e545a, #2f3438);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.4);
+}
+.keypad-lit {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(47, 240, 182, 0.32);
+}
+.key {
+  border: 0;
+  padding: clamp(4px, 0.9vh, 6px) 0;
+  border-radius: 2px;
+  cursor: pointer;
+  font:
+    600 clamp(9.5px, 1.8vw, 11px) "DM Sans",
+    sans-serif;
+  color: #23282b;
+  background: linear-gradient(180deg, #e6ebee, #a9b1b7);
+  box-shadow:
+    0 2px 0 #4d5358,
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.key:active,
+.key.pressed {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #4d5358;
+}
+.key.enter {
+  color: #04241d;
+  background: linear-gradient(180deg, #7df4cf, #12a37f);
+  box-shadow: 0 2px 0 #0a6853;
+}
+.key.cancel {
+  color: #2d0d10;
+  background: linear-gradient(180deg, #ffb1ac, #d1584f);
+  box-shadow: 0 2px 0 #7c2b25;
+}
+
+.atm-base {
+  position: relative;
+  height: clamp(32px, 6vh, 68px);
+  margin-top: -2px;
+  border-radius: 0 0 5px 5px;
+  background: linear-gradient(180deg, #3a4045, #21262a 60%, #14181a);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.12),
+    inset -14px 0 26px rgba(0, 0, 0, 0.45);
+  flex-shrink: 0;
+}
+.atm-base::before {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 14px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 14px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* ---- the physical card ---- */
+.atm-card {
+  position: absolute;
+  right: clamp(10px, 3.5vw, 36px);
+  bottom: clamp(14px, 3.5vh, 40px);
+  width: clamp(100px, 20vw, 140px);
+  aspect-ratio: 1.585;
+  border-radius: 7px;
+  z-index: 6;
+  cursor: pointer;
+  color: #fff4e6;
+  padding: clamp(6px, 1.2vh, 10px) clamp(8px, 1.5vw, 11px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #7b3944 0%, #b85f68 45%, #4b1f27 100%);
+  box-shadow:
+    0 14px 26px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: rotate(-7deg);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.35s ease,
+    left 0.45s ease,
+    top 0.45s ease;
+}
+.atm-card .chip {
+  width: clamp(18px, 3.5vw, 24px);
+  height: clamp(13px, 2.5vh, 18px);
+  border-radius: 3px;
+  background: linear-gradient(135deg, #f6dfa8, #b8912f);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.atm-card .card-name {
+  font:
+    600 clamp(7.5px, 1.5vw, 9px) "DM Sans",
+    sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.atm-card .card-bank {
+  font:
+    600 clamp(7px, 1.4vw, 8px) "DM Sans",
+    sans-serif;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+}
+.atm-card.inserting {
+  animation: cardIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes cardIn {
+  0% {
+    opacity: 1;
+  }
+  55% {
+    transform: rotate(0deg) scale(0.86);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(0.7) translateY(-6px);
+    opacity: 0;
+  }
+}
+.atm-card.returning {
+  animation: cardOut 0.8s ease both;
+}
+@keyframes cardOut {
+  from {
+    opacity: 0;
+    transform: rotate(0) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+.atm-card.taken {
+  animation: cardTaken 0.55s ease forwards;
+}
+@keyframes cardTaken {
+  to {
+    transform: translate(50px, 70px) rotate(16deg) scale(0.88);
+    opacity: 0;
+  }
+}
+
+.card-hint {
+  position: absolute;
+  right: clamp(10px, 3.5vw, 36px);
+  bottom: clamp(4px, 1vh, 14px);
+  z-index: 6;
+  color: #ffeede;
+  font:
+    600 clamp(8px, 1.7vw, 9.5px) "DM Sans",
+    sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  animation: softPulse 1.6s ease-in-out infinite;
+  white-space: nowrap;
+}
+@keyframes softPulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ---- receipt ---- */
+.receipt-paper {
+  position: absolute;
+  left: 50%;
+  width: clamp(140px, 30vw, 172px);
+  padding: 10px 10px 16px;
+  transform: translateX(-50%);
+  transform-origin: top center;
+  touch-action: none;
+  background: repeating-linear-gradient(180deg, #fffdf6 0 20px, #fbf7ec 20px 21px);
+  color: #2a2326;
+  font:
+    500 clamp(8px, 1.6vw, 9.5px)/1.6 "DM Sans",
+    monospace;
+  letter-spacing: 0.04em;
+  text-align: center;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.5);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 5px),
+    92% 100%,
+    84% calc(100% - 5px),
+    76% 100%,
+    68% calc(100% - 5px),
+    60% 100%,
+    52% calc(100% - 5px),
+    44% 100%,
+    36% calc(100% - 5px),
+    28% 100%,
+    20% calc(100% - 5px),
+    12% 100%,
+    4% calc(100% - 5px),
+    0 100%
+  );
+  cursor: pointer;
+  z-index: 7;
+}
+.receipt-paper.pulled {
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+.receipt-paper b {
+  display: block;
+  letter-spacing: 0.16em;
+  font-size: clamp(9px, 1.8vw, 10.5px);
+}
+.receipt-paper hr {
+  border: 0;
+  border-top: 1px dashed #b9ada4;
+  margin: 4px 0;
+}
+.receipt-line {
+  display: flex;
+  justify-content: space-between;
+}
+.receipt-heart {
+  font-size: 12px;
+}
+
+.atm-toast {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 9;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(10, 12, 12, 0.88);
+  color: #d9fff2;
+  font:
+    600 clamp(9px, 1.8vw, 10px) "DM Sans",
+    sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(47, 240, 182, 0.4);
+  white-space: nowrap;
+}
+
+.atm-door {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  background: #050606;
+  animation: doorOpen 1.8s cubic-bezier(0.66, 0, 0.34, 1) forwards;
+  clip-path: inset(0 0 0 0);
+}
+@keyframes doorOpen {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 50% 0 50%);
+  }
+}
+
+/* ================= CUT THE CAKE ================= */
+.cutcake-stage {
+  position: relative;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+  max-height: clamp(340px, 50vh, 480px);
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  user-select: none;
+}
+.cutcake-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+.knife {
+  position: absolute;
+  right: 4%;
+  top: 10%;
+  width: 32px;
+  height: 180px;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(-6px 8px 10px rgba(0, 0, 0, 0.35));
+  transition: transform 0.25s ease;
+}
+.cut-help {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: clamp(9px, 2vw, 10px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cut-count {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 5px 10px;
+  border: 1px solid rgba(123, 57, 68, 0.25);
+  color: var(--wine);
+  font:
+    600 10px "DM Sans",
+    sans-serif;
+  letter-spacing: 0.14em;
+  background: rgba(255, 253, 248, 0.85);
+  border-radius: 3px;
+}
+
+/* ================= ACCEPT GIFT ================= */
+.gift-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 20px;
+  padding-top: 8px;
+  width: 100%;
+}
+.gift-box {
+  position: relative;
+  width: clamp(170px, 32vw, 210px);
+  height: clamp(150px, 28vw, 180px);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  animation: giftWobble 2.4s ease-in-out infinite;
+}
+@keyframes giftWobble {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-8px);
+  }
+}
+.gift-body {
+  position: absolute;
+  inset: 44px 0 0;
+  border-radius: 5px;
+  background: linear-gradient(160deg, #b85f68, #7b3944);
+  box-shadow:
+    0 24px 40px rgba(58, 35, 38, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.gift-lid {
+  position: absolute;
+  left: -8px;
+  right: -8px;
+  top: 20px;
+  height: 44px;
+  border-radius: 5px;
+  background: linear-gradient(160deg, #d1727b, #93444f);
+  box-shadow:
+    0 10px 18px rgba(58, 35, 38, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition:
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.8s ease;
+  z-index: 3;
+}
+.gift-ribbon-v {
+  position: absolute;
+  left: 50%;
+  top: 44px;
+  bottom: 0;
+  width: 24px;
+  margin-left: -12px;
+  background: var(--gold);
+  opacity: 0.9;
+}
+.gift-bow {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  color: var(--gold);
+  z-index: 4;
+  transition:
+    transform 0.9s ease,
+    opacity 0.8s ease;
+}
+.gift-box.opened .gift-lid {
+  transform: translateY(-120px) rotate(-16deg);
+  opacity: 0;
+}
+.gift-box.opened .gift-bow {
+  transform: translateX(-50%) translateY(-150px) rotate(24deg);
+  opacity: 0;
+}
+.gift-shine {
+  position: absolute;
+  inset: 44px 0 0;
+  border-radius: 5px;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 60%
+  );
+}
+
+.gift-reveal {
+  width: min(560px, 94%);
+  padding: clamp(22px, 4.5vw, 32px) clamp(18px, 4vw, 34px);
+  text-align: center;
+  background: #fffdf8;
+  border: 1px solid rgba(37, 25, 29, 0.12);
+  box-shadow: 0 22px 50px rgba(37, 25, 29, 0.16);
+  border-radius: 6px;
+  animation: pageIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.gift-reveal h3 {
+  margin: 0 0 10px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(26px, 4.5vw, 42px);
+  font-weight: 500;
+}
+.gift-reveal p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: clamp(13px, 2.5vw, 14px);
+  line-height: 1.75;
+}
+.gift-reveal .signature {
+  margin-top: 12px;
+  color: var(--wine);
+  font:
+    clamp(22px, 4.5vw, 26px) "Sacramento",
+    cursive;
+}
+.gift-coupons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.gift-coupon {
+  padding: 6px 12px;
+  border: 1px dashed var(--rose);
+  color: var(--wine);
+  font-size: clamp(9.5px, 2vw, 11px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
